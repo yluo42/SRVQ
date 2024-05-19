@@ -65,7 +65,7 @@ class SVQ(nn.Module):
                 random_input = input_detach[random_input_idx].reshape(input_detach.shape)
                 if random_input.shape[0] < self.num_code:
                     random_input = torch.cat([random_input]*(self.num_code // random_input.shape[0] + 1), 0)
-                random_input = random_input[:self.num_code,:].contiguous().transpose(0,1)  # num_band, num_code, dim
+                random_input = random_input[:self.num_code]  # num_code, dim
 
                 self.embedding = self.embedding * (1 - replace_code).unsqueeze(-1) + random_input * replace_code.unsqueeze(-1)
                 self.ema_weight = self.ema_weight * (1 - replace_code).unsqueeze(-1) + random_input * replace_code.unsqueeze(-1)
