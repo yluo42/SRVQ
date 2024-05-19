@@ -130,7 +130,7 @@ class Quantizer(nn.Module):
             else:
                 self.RVQ.append(RotVQ(2**bit[i], code_dim))
 
-    def forward(self, input, anchor=None):
+    def forward(self, input):
         
         quantized = []
         for i in range(len(self.RVQ)):
@@ -141,9 +141,6 @@ class Quantizer(nn.Module):
             else:
                 this_quantized = self.RVQ[i](quantized[-1], input)
             quantized.append(this_quantized)
-
-        if anchor is not None:
-            quantized = quantized[1:]
         
         latent_loss = []
         for i in range(len(self.RVQ)):
