@@ -1,8 +1,8 @@
 # Spherical residual vector quantization (SRVQ)
 
-This repository contains a Pytorch-based minimalist implementation of the spherical residual vector quantization (SRVQ) module used in our Gull neural audio codec framework.
+This repository contains a Pytorch-based minimalist implementation of the spherical residual vector quantization (SRVQ) module used in our [Gull neural audio codec](https://arxiv.org/abs/2404.04947) framework.
 
-SRVQ is a modification to the standard RVQ to better quantize unit-norm inputs. The general idea is to use unit-norm codebooks with standard VQ-VAE selection and update scheme at the first hierarchy (R=1), while use **rotation matrices** defined by Householder transform as learnable codebooks for other hierarchies (R>1).
+SRVQ is a modification to the standard RVQ to better quantize unit-norm inputs. The general idea is to use unit-norm codebooks with standard VQ-VAE selection and update scheme at the first hierarchy (R=1), while use **rotation matrices** defined by Householder transformations (treat learnable reflection matrices as learnable rotation matrices) for other hierarchies (R>1).
 
 # Reference
 If you use SRVQ in your project, please consider citing the following paper:
