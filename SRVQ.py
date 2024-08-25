@@ -103,7 +103,7 @@ class RotVQ(nn.Module):
         # a more efficient implementation without explicitly calculating the rotation matrices
         rot_emb = self.rot_emb / (self.rot_emb.pow(2).sum(-1) + self.eps).sqrt().unsqueeze(-1)
         # always contain an identity rotation matrix
-        rot_emb = torch.cat([rot_emb[:,:1] * 0., rot_emb[:,1:]], 1)
+        rot_emb = torch.cat([rot_emb[:1] * 0., rot_emb[1:]], 0)
         eu_dis = 2 - 2 * (target * prev_input).sum(-1).unsqueeze(-1)  # B*T, 1
         eu_dis = eu_dis + 4 * target.mm(rot_emb.T) * prev_input.mm(rot_emb.T)  # B*T, num_code
 
